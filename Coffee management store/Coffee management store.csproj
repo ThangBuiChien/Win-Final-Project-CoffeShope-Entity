@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CEF4583-4F5B-4646-B18F-B2260795AD94}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Coffee_management_store</RootNamespace>
+    <AssemblyName>Coffee management store</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BL\BLAccount.cs" />
+    <Compile Include="BL\BLAnalysis.cs" />
+    <Compile Include="BL\BLCustomer.cs" />
+    <Compile Include="BL\BLEmployee.cs" />
+    <Compile Include="BL\BLInventory.cs" />
+    <Compile Include="BL\BLLogin.cs" />
+    <Compile Include="BL\BLMenu.cs" />
+    <Compile Include="BL\BLMonthlyPay.cs" />
+    <Compile Include="BL\InvoiceBL.cs" />
+    <Compile Include="BL\Invoice_DtBL.cs" />
+    <Compile Include="BL\SupplyBL.cs" />
+    <Compile Include="Coffee_Management_DatabaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Coffee_Management_DatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Database.cs" />
+    <Compile Include="EmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeForm.Designer.cs">
+      <DependentUpon>EmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EmployeeForm.resx">
+      <DependentUpon>EmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Coffee_Management_DatabaseDataSet.xsc">
+      <DependentUpon>Coffee_Management_DatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Coffee_Management_DatabaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Coffee_Management_DatabaseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Coffee_Management_DatabaseDataSet.xss">
+      <DependentUpon>Coffee_Management_DatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %283%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\piw piw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\4105938-account-card-id-identification-identity-card-profile-user-profile_113929.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\3298601-document-new-new-document-plus_106996.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\employee_solid_icon_235377.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\iconfinder-trash-4341321_120557.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\magnifying_glass_icon_129144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\note-task-comment-message-edit-write_108613.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\iconfinder-3-avatar-2754579_120516.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\1486503783-bag-briefcase-business-case-job-portfolio-suitcase_81278.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\task_calendar_timeline_plan_start_date_due_date_icon_142241.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\essential_interaction_touch_finger_hand_salary_icon_226227.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\gmail_new_logo_icon_159149.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\auricular-phone-symbol-in-a-circle_icon-icons.com_56570.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\status_sign_positive_checked_check_accepted_success_icon_220294.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\night-coffee-shop-thumb.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\coffee-menu-template-vector-wooden-background-91349377.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\anime-cafe-night-lights-outdoors-hd-wallpaper-preview.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img\63c698ad5f4f4e0da7543126be1ccd5d.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\__kochou_shinobu_kimetsu_no_yaiba_drawn_by_hikashou__436899ea4d0b49ae45951a5edc3e1b16.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying_glass_icon_129144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10047331.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AE Entropy on Twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10047332.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1642273901byio2_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Genshin stickers pt21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restart_icon_227406.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
