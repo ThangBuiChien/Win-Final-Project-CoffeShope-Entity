@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c5afee4a6c54987a68e6892ce0c1c3b" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Account" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Customer" Width="1.5" PointX="3.75" PointY="15.875" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Delivery_address" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Employee" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Invoice" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Invoice_detail" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Menu" Width="1.5" PointX="6" PointY="1.375" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Monthly_pay" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.rank" Width="1.5" PointX="1.5" PointY="16.25" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Shop" Width="1.5" PointX="3.75" PointY="1" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Supplier_Detail" Width="1.5" PointX="6" PointY="11.625" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Income" Width="1.5" PointX="6" PointY="15.125" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Inventory" Width="1.5" PointX="8.25" PointY="1.5" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.Customer_Employee_IDs" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.inventory_view" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.PrintInvoice" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.PrintInvoice2" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CoffeeShopRealModel.working" Width="1.5" PointX="8.75" PointY="11.75" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Account__E_ID__398D8EEE" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Customer__cRank__3B75D760" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Invoice__custome__403A8C7D" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Delivery_a__I_ID__37A5467C" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Invoice__employe__38996AB5" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Monthly_pa__E_ID__3A81B327" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Invoice__shop_ID__35BCFE0A" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Invoice_de__I_ID__3F466844" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Invoice_de__d_ID__3E52440B" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Inventory__dID__3D5E1FD2" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Income__S_ID__36B12243" />
+        <AssociationConnector Association="CoffeeShopRealModel.FK__Inventory__suppl__3C69FB99" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,2140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CoffeeShopRealModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="username" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="30" />
+          <Property Name="statification" Type="nchar" MaxLength="10" />
+          <Property Name="active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="cName" Type="nchar" MaxLength="20" />
+          <Property Name="point" Type="int" />
+          <Property Name="cRank" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Delivery_address">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="start" Type="date" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="position" Type="nchar" MaxLength="10" />
+          <Property Name="fixed_salary" Type="int" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="phone_number" Type="int" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.Income' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="S_ID" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="S_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="day_total" Type="int" />
+          <Property Name="month_total" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.Inventory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="amount" Type="int" />
+          <Property Name="buyingPrice" Type="int" />
+          <Property Name="dID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="supplier_ID" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDate" Type="date" />
+          <Property Name="customer_ID" Type="nchar" MaxLength="10" />
+          <Property Name="shop_ID" Type="nchar" MaxLength="10" />
+          <Property Name="coupon" Type="float" />
+          <Property Name="initial_total" Type="float" />
+          <Property Name="discount" Type="float" />
+          <Property Name="delivery" Type="nchar" MaxLength="5" />
+          <Property Name="employee_ID" Type="nchar" MaxLength="10" />
+          <Property Name="final_total" Type="float" />
+        </EntityType>
+        <EntityType Name="Invoice_detail">
+          <Key>
+            <PropertyRef Name="I_ID" />
+            <PropertyRef Name="d_ID" />
+          </Key>
+          <Property Name="I_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="d_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="quality" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="dID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="mName" Type="nchar" MaxLength="20" />
+          <Property Name="mDescription" Type="nchar" MaxLength="30" />
+          <Property Name="img_path" Type="nchar" MaxLength="100" />
+          <Property Name="prices" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Monthly_pay">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="month" Type="date" Nullable="false" />
+          <Property Name="days_absent" Type="int" />
+          <Property Name="penalty" Type="int" />
+          <Property Name="total_salary" Type="int" />
+        </EntityType>
+        <EntityType Name="rank">
+          <Key>
+            <PropertyRef Name="rRank" />
+          </Key>
+          <Property Name="rRank" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="discount" Type="float" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fixed_cost" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier_Detail">
+          <Key>
+            <PropertyRef Name="SD_ID" />
+          </Key>
+          <Property Name="SD_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="supplyName" Type="nchar" MaxLength="20" />
+          <Property Name="sAddress" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.Customer_Employee_IDs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer_Employee_IDs">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Table_Name" />
+          </Key>
+          <Property Name="ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Table_Name" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CoffeeShopReal.dbo.date_income' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="date_income">
+          <Property Name="Day" Type="int" />
+          <Property Name="day_total" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.inventory_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="inventory_view">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="dID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="buyingPrice" Type="int" />
+          <Property Name="Drink_Name" Type="nchar" MaxLength="20" />
+          <Property Name="amount" Type="int" />
+          <Property Name="Supplier_ID" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CoffeeShopReal.dbo.month_income' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="month_income">
+          <Property Name="Month" Type="int" />
+          <Property Name="month_total" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CoffeeShopReal.dbo.month_income_totals' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="month_income_totals">
+          <Property Name="Month" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.PrintInvoice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PrintInvoice">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDate" Type="date" />
+          <Property Name="customer_ID" Type="nchar" MaxLength="10" />
+          <Property Name="quality" Type="int" />
+          <Property Name="initial_total" Type="float" />
+          <Property Name="final_total" Type="float" />
+          <Property Name="Products" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.PrintInvoice2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PrintInvoice2">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDate" Type="date" />
+          <Property Name="customer_ID" Type="nchar" MaxLength="10" />
+          <Property Name="quality" Type="int" />
+          <Property Name="initial_total" Type="float" />
+          <Property Name="final_total" Type="float" />
+          <Property Name="d_ID" Type="nchar" MaxLength="10" />
+          <Property Name="Products" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CoffeeShopReal.dbo.working' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="working">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="start" Type="date" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="position" Type="nchar" MaxLength="10" />
+          <Property Name="fixed_salary" Type="int" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="phone_number" Type="int" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Account__E_ID__398D8EEE">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="E_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__cRank__3B75D760">
+          <End Role="rank" Type="Self.rank" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rank">
+              <PropertyRef Name="rRank" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="cRank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Delivery_a__I_ID__37A5467C">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Delivery_address" Type="Self.Delivery_address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="I_ID" />
+            </Principal>
+            <Dependent Role="Delivery_address">
+              <PropertyRef Name="I_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Income__S_ID__36B12243">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="1" />
+          <End Role="Income" Type="Self.Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="Income">
+              <PropertyRef Name="S_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__dID__3D5E1FD2">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="dID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="dID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__suppl__3C69FB99">
+          <End Role="Supplier_Detail" Type="Self.Supplier_Detail" Multiplicity="0..1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Detail">
+              <PropertyRef Name="SD_ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__custome__403A8C7D">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__employe__38996AB5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__shop_ID__35BCFE0A">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="shop_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice_de__d_ID__3E52440B">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Invoice_detail" Type="Self.Invoice_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="dID" />
+            </Principal>
+            <Dependent Role="Invoice_detail">
+              <PropertyRef Name="d_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice_de__I_ID__3F466844">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="Invoice_detail" Type="Self.Invoice_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="I_ID" />
+            </Principal>
+            <Dependent Role="Invoice_detail">
+              <PropertyRef Name="I_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Monthly_pa__E_ID__3A81B327">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Monthly_pay" Type="Self.Monthly_pay" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Monthly_pay">
+              <PropertyRef Name="E_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Add_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="nchar" Mode="In" />
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Stratification" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Add_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cID" Type="nchar" Mode="In" />
+          <Parameter Name="cName" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="add_invoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nchar" Mode="In" />
+          <Parameter Name="idemp" Type="nchar" Mode="In" />
+          <Parameter Name="idcus" Type="nchar" Mode="In" />
+          <Parameter Name="delivery" Type="nchar" Mode="In" />
+          <Parameter Name="cp" Type="float" Mode="In" />
+        </Function>
+        <Function Name="Add_Invoice_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_ID" Type="nchar" Mode="In" />
+          <Parameter Name="D_ID" Type="nchar" Mode="In" />
+          <Parameter Name="quality" Type="int" Mode="In" />
+        </Function>
+        <Function Name="add_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+          <Parameter Name="name" Type="nchar" Mode="In" />
+          <Parameter Name="description" Type="nchar" Mode="In" />
+          <Parameter Name="img" Type="nchar" Mode="In" />
+          <Parameter Name="prices" Type="int" Mode="In" />
+        </Function>
+        <Function Name="add_supplier_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="S_ID" Type="nchar" Mode="In" />
+          <Parameter Name="S_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="S_Address" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="addAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="char" Mode="In" />
+          <Parameter Name="username" Type="char" Mode="In" />
+          <Parameter Name="password" Type="char" Mode="In" />
+          <Parameter Name="sta" Type="char" Mode="In" />
+          <Parameter Name="active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="AddEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="nchar" Mode="In" />
+          <Parameter Name="start" Type="date" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="position" Type="nchar" Mode="In" />
+          <Parameter Name="fixed_salary" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nchar" Mode="In" />
+          <Parameter Name="phone_number" Type="int" Mode="In" />
+          <Parameter Name="status" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="AddInventoryProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="amount" Type="int" Mode="In" />
+          <Parameter Name="buyingPrice" Type="int" Mode="In" />
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+          <Parameter Name="supplier_ID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="addMonthlyPay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="date" Mode="In" />
+          <Parameter Name="days_absent" Type="int" Mode="In" />
+          <Parameter Name="Penalty" Type="int" Mode="In" />
+          <Parameter Name="TotalSalary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="addMonthlyPay1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="date" Mode="In" />
+          <Parameter Name="days_absent" Type="int" Mode="In" />
+          <Parameter Name="Penalty" Type="int" Mode="In" />
+          <Parameter Name="TotalSalary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculate_employee_productivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="employee_id" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="total_sales" Type="int" />
+                <Property Name="total_orders" Type="int" />
+                <Property Name="total_revenue" Type="float" />
+                <Property Name="average_revenue_per_order" Type="float" />
+                <Property Name="average_items_per_order" Type="int" />
+                <Property Name="average_revenue_per_item" Type="float" />
+                <Property Name="productivity" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="calculate_shop_profitability" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="shop_id" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="total_revenue" Type="float" />
+                <Property Name="fixed_cost" Type="int" />
+                <Property Name="profit" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="calculate_shop_profitability1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="shop_id" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="total_revenue" Type="float" />
+                <Property Name="fixed_cost" Type="int" />
+                <Property Name="profit" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="changeMonthlyPay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="date" Mode="In" />
+          <Parameter Name="days_absent" Type="int" Mode="In" />
+          <Parameter Name="Penalty" Type="int" Mode="In" />
+          <Parameter Name="TotalSalary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="check_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="EName" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="check_month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="EName" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="DEL_Acc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="char" Mode="In" />
+        </Function>
+        <Function Name="Delete_Employee1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Delete_Inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="delete_invoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="delete_InvoiceDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="D_ID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="delete_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Delete_supplier_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="supplier_id" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="deleteMonthlyPay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Find_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="cID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="cName" Type="nchar" MaxLength="20" />
+                <Property Name="point" Type="int" />
+                <Property Name="cRank" Type="nchar" MaxLength="10" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Find_Drink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="dID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="mName" Type="nchar" MaxLength="20" />
+                <Property Name="mDescription" Type="nchar" MaxLength="30" />
+                <Property Name="img_path" Type="nchar" MaxLength="100" />
+                <Property Name="prices" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Find_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="start" Type="date" />
+                <Property Name="Name" Type="nchar" MaxLength="30" />
+                <Property Name="position" Type="nchar" MaxLength="10" />
+                <Property Name="fixed_salary" Type="int" />
+                <Property Name="email" Type="nchar" MaxLength="50" />
+                <Property Name="phone_number" Type="int" />
+                <Property Name="status" Type="nchar" MaxLength="10" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Find_Employee1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="start" Type="date" />
+                <Property Name="Name" Type="nchar" MaxLength="30" />
+                <Property Name="position" Type="nchar" MaxLength="10" />
+                <Property Name="fixed_salary" Type="int" />
+                <Property Name="email" Type="nchar" MaxLength="50" />
+                <Property Name="phone_number" Type="int" />
+                <Property Name="status" Type="nchar" MaxLength="10" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="findEMP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="start" Type="date" />
+                <Property Name="Name" Type="nchar" MaxLength="30" />
+                <Property Name="position" Type="nchar" MaxLength="10" />
+                <Property Name="fixed_salary" Type="int" />
+                <Property Name="email" Type="nchar" MaxLength="50" />
+                <Property Name="phone_number" Type="int" />
+                <Property Name="status" Type="nchar" MaxLength="10" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FindTopSalesEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Name" Type="nchar" MaxLength="30" />
+                <Property Name="TotalSales" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="get_employee_with_most_sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="E_ID" Type="nchar" MaxLength="10" Nullable="false" />
+                <Property Name="Name" Type="nchar" MaxLength="30" />
+                <Property Name="TotalSales" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="InitialTotal1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_ID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="I_ID" Type="nchar" MaxLength="10" />
+                <Property Name="total_sum" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Insert_Employee_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Employee_ID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="fixed_salary" Type="int" Mode="In" />
+          <Parameter Name="phone_number" Type="int" Mode="In" />
+          <Parameter Name="position" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Insert_Employee_Account12" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Employee_ID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="fixed_salary" Type="int" Mode="In" />
+          <Parameter Name="phone_number" Type="int" Mode="In" />
+          <Parameter Name="position" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="manageMonthlyPay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="varchar" Mode="In" />
+          <Parameter Name="Month" Type="date" Mode="In" />
+          <Parameter Name="days_absent" Type="int" Mode="In" />
+          <Parameter Name="Penalty" Type="int" Mode="In" />
+          <Parameter Name="TotalSalary" Type="int" Mode="In" />
+          <Parameter Name="Action" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sales_trends" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="start_date" Type="date" Mode="In" />
+          <Parameter Name="end_date" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="product_name" Type="nvarchar" MaxLength="50" />
+                <Property Name="total_sales" Type="int" />
+                <Property Name="average_sales" Type="int" />
+                <Property Name="peak_sales_time" Type="time" Precision="7" />
+                <Property Name="peak_sales_day" Type="varchar" MaxLength="10" />
+                <Property Name="top_customer_name" Type="nvarchar" MaxLength="20" />
+                <Property Name="top_customer_total" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="securityTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="securityTest2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Update_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="nchar" Mode="In" />
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="Stratification" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="nchar" Mode="In" />
+          <Parameter Name="Start_Date" Type="date" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="Position" Type="nchar" Mode="In" />
+          <Parameter Name="Fixed_Salary" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nchar" Mode="In" />
+          <Parameter Name="Phone_Number" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Inventory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="amount" Type="int" Mode="In" />
+          <Parameter Name="buying_price" Type="int" Mode="In" />
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="update_invoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nchar" Mode="In" />
+          <Parameter Name="idemp" Type="nchar" Mode="In" />
+          <Parameter Name="idcus" Type="nchar" Mode="In" />
+          <Parameter Name="delivery" Type="nchar" Mode="In" />
+          <Parameter Name="cp" Type="float" Mode="In" />
+        </Function>
+        <Function Name="update_invoice_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_ID" Type="nchar" Mode="In" />
+          <Parameter Name="D_ID" Type="nchar" Mode="In" />
+          <Parameter Name="new_quality" Type="int" Mode="In" />
+        </Function>
+        <Function Name="update_InvoiceDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Invoice_id" Type="nchar" Mode="In" />
+          <Parameter Name="Drink_id" Type="nchar" Mode="In" />
+          <Parameter Name="new_quality" Type="int" Mode="In" />
+        </Function>
+        <Function Name="update_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dID" Type="nchar" Mode="In" />
+          <Parameter Name="name" Type="nchar" Mode="In" />
+          <Parameter Name="description" Type="nchar" Mode="In" />
+          <Parameter Name="img" Type="nchar" Mode="In" />
+          <Parameter Name="prices" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Update_supplierdetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="supplier_id" Type="nchar" Mode="In" />
+          <Parameter Name="supply_name" Type="nchar" Mode="In" />
+          <Parameter Name="supply_address" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="updateAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_ID" Type="char" Mode="In" />
+          <Parameter Name="username" Type="char" Mode="In" />
+          <Parameter Name="password" Type="char" Mode="In" />
+          <Parameter Name="sta" Type="char" Mode="In" />
+          <Parameter Name="active" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="V_CheckAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nchar" Mode="In" />
+          <Parameter Name="pass" Type="nchar" Mode="In" />
+          <Parameter Name="role" Type="nchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="E_ID" Type="nchar" MaxLength="10" />
+                <Property Name="username" Type="nchar" MaxLength="30" />
+                <Property Name="password" Type="nchar" MaxLength="30" />
+                <Property Name="statification" Type="nchar" MaxLength="10" />
+                <Property Name="active" Type="bit" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="CoffeeShopRealModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery_address" EntityType="Self.Delivery_address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice_detail" EntityType="Self.Invoice_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monthly_pay" EntityType="Self.Monthly_pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rank" EntityType="Self.rank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier_Detail" EntityType="Self.Supplier_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income" EntityType="Self.Income" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Income].[S_ID] AS [S_ID], 
+    [Income].[date] AS [date], 
+    [Income].[day_total] AS [day_total], 
+    [Income].[month_total] AS [month_total]
+    FROM [dbo].[Income] AS [Income]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Inventory].[amount] AS [amount], 
+    [Inventory].[buyingPrice] AS [buyingPrice], 
+    [Inventory].[dID] AS [dID], 
+    [Inventory].[supplier_ID] AS [supplier_ID]
+    FROM [dbo].[Inventory] AS [Inventory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Customer_Employee_IDs" EntityType="Self.Customer_Employee_IDs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer_Employee_IDs].[ID] AS [ID], 
+    [Customer_Employee_IDs].[Table_Name] AS [Table_Name]
+    FROM [dbo].[Customer_Employee_IDs] AS [Customer_Employee_IDs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="inventory_view" EntityType="Self.inventory_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [inventory_view].[dID] AS [dID], 
+    [inventory_view].[buyingPrice] AS [buyingPrice], 
+    [inventory_view].[Drink_Name] AS [Drink_Name], 
+    [inventory_view].[amount] AS [amount], 
+    [inventory_view].[Supplier_ID] AS [Supplier_ID]
+    FROM [dbo].[inventory_view] AS [inventory_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PrintInvoice" EntityType="Self.PrintInvoice" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PrintInvoice].[I_ID] AS [I_ID], 
+    [PrintInvoice].[IDate] AS [IDate], 
+    [PrintInvoice].[customer_ID] AS [customer_ID], 
+    [PrintInvoice].[quality] AS [quality], 
+    [PrintInvoice].[initial_total] AS [initial_total], 
+    [PrintInvoice].[final_total] AS [final_total], 
+    [PrintInvoice].[Products] AS [Products]
+    FROM [dbo].[PrintInvoice] AS [PrintInvoice]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PrintInvoice2" EntityType="Self.PrintInvoice2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PrintInvoice2].[I_ID] AS [I_ID], 
+    [PrintInvoice2].[IDate] AS [IDate], 
+    [PrintInvoice2].[customer_ID] AS [customer_ID], 
+    [PrintInvoice2].[quality] AS [quality], 
+    [PrintInvoice2].[initial_total] AS [initial_total], 
+    [PrintInvoice2].[final_total] AS [final_total], 
+    [PrintInvoice2].[d_ID] AS [d_ID], 
+    [PrintInvoice2].[Products] AS [Products]
+    FROM [dbo].[PrintInvoice2] AS [PrintInvoice2]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="working" EntityType="Self.working" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [working].[E_ID] AS [E_ID], 
+    [working].[start] AS [start], 
+    [working].[Name] AS [Name], 
+    [working].[position] AS [position], 
+    [working].[fixed_salary] AS [fixed_salary], 
+    [working].[email] AS [email], 
+    [working].[phone_number] AS [phone_number], 
+    [working].[status] AS [status]
+    FROM [dbo].[working] AS [working]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Account__E_ID__398D8EEE" Association="Self.FK__Account__E_ID__398D8EEE">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__cRank__3B75D760" Association="Self.FK__Customer__cRank__3B75D760">
+            <End Role="rank" EntitySet="rank" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Delivery_a__I_ID__37A5467C" Association="Self.FK__Delivery_a__I_ID__37A5467C">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Delivery_address" EntitySet="Delivery_address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Income__S_ID__36B12243" Association="Self.FK__Income__S_ID__36B12243">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Income" EntitySet="Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__dID__3D5E1FD2" Association="Self.FK__Inventory__dID__3D5E1FD2">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__suppl__3C69FB99" Association="Self.FK__Inventory__suppl__3C69FB99">
+            <End Role="Supplier_Detail" EntitySet="Supplier_Detail" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__custome__403A8C7D" Association="Self.FK__Invoice__custome__403A8C7D">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__employe__38996AB5" Association="Self.FK__Invoice__employe__38996AB5">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__shop_ID__35BCFE0A" Association="Self.FK__Invoice__shop_ID__35BCFE0A">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice_de__d_ID__3E52440B" Association="Self.FK__Invoice_de__d_ID__3E52440B">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Invoice_detail" EntitySet="Invoice_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice_de__I_ID__3F466844" Association="Self.FK__Invoice_de__I_ID__3F466844">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Invoice_detail" EntitySet="Invoice_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Monthly_pa__E_ID__3A81B327" Association="Self.FK__Monthly_pa__E_ID__3A81B327">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Monthly_pay" EntitySet="Monthly_pay" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoffeeShopRealModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="calculate_employee_productivity_Result">
+          <Property Name="employee_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="total_sales" Type="Int32" />
+          <Property Name="total_orders" Type="Int32" />
+          <Property Name="total_revenue" Type="Double" />
+          <Property Name="average_revenue_per_order" Type="Double" />
+          <Property Name="average_items_per_order" Type="Int32" />
+          <Property Name="average_revenue_per_item" Type="Double" />
+          <Property Name="productivity" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="calculate_shop_profitability_Result">
+          <Property Name="shop_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="total_revenue" Type="Double" />
+          <Property Name="fixed_cost" Type="Int32" />
+          <Property Name="profit" Type="Double" />
+        </ComplexType>
+        <ComplexType Name="calculate_shop_profitability1_Result">
+          <Property Name="shop_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="total_revenue" Type="Double" />
+          <Property Name="fixed_cost" Type="Int32" />
+          <Property Name="profit" Type="Double" />
+        </ComplexType>
+        <ComplexType Name="Find_Customer_Result">
+          <Property Name="cID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="point" Type="Int32" />
+          <Property Name="cRank" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="Find_Drink_Result">
+          <Property Name="dID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="mName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="mDescription" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="img_path" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="prices" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Find_Employee_Result">
+          <Property Name="E_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="start" Type="DateTime" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fixed_salary" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone_number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="Find_Employee1_Result">
+          <Property Name="E_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="start" Type="DateTime" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fixed_salary" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone_number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="findEMP_Result">
+          <Property Name="E_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="start" Type="DateTime" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fixed_salary" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone_number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="FindTopSalesEmployee_Result">
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="TotalSales" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="get_employee_with_most_sales_Result">
+          <Property Name="E_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="TotalSales" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="InitialTotal1_Result">
+          <Property Name="I_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="total_sum" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="sales_trends_Result">
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="total_sales" Type="Int32" />
+          <Property Name="average_sales" Type="Int32" />
+          <Property Name="peak_sales_time" Type="Time" />
+          <Property Name="peak_sales_day" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="top_customer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="top_customer_total" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="V_CheckAccount_Result">
+          <Property Name="E_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="statification" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="active" Type="Boolean" />
+        </ComplexType>
+        <EntityContainer Name="QLCoffeEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="calculate_employee_productivity" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.calculate_employee_productivity_Result)" />
+          <FunctionImport Name="calculate_shop_profitability" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.calculate_shop_profitability_Result)" />
+          <FunctionImport Name="calculate_shop_profitability1" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.calculate_shop_profitability1_Result)" />
+          <FunctionImport Name="Find_Customer" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.Find_Customer_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Find_Drink" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.Find_Drink_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Find_Employee" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.Find_Employee_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Find_Employee1" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.Find_Employee1_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="findEMP" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.findEMP_Result)">
+          <Parameter Name="E_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FindTopSalesEmployee" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.FindTopSalesEmployee_Result)" />
+          <FunctionImport Name="get_employee_with_most_sales" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.get_employee_with_most_sales_Result)" />
+          <FunctionImport Name="InitialTotal1" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.InitialTotal1_Result)">
+          <Parameter Name="I_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sales_trends" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.sales_trends_Result)">
+            <Parameter Name="start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="end_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="V_CheckAccount" IsComposable="true" ReturnType="Collection(CoffeeShopRealModel.V_CheckAccount_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+            <Parameter Name="role" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Account">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Stratification" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Customer">
+            <Parameter Name="cID" Mode="In" Type="String" />
+            <Parameter Name="cName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="add_invoice">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="idemp" Mode="In" Type="String" />
+            <Parameter Name="idcus" Mode="In" Type="String" />
+            <Parameter Name="delivery" Mode="In" Type="String" />
+            <Parameter Name="cp" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Invoice_detail">
+            <Parameter Name="I_ID" Mode="In" Type="String" />
+            <Parameter Name="D_ID" Mode="In" Type="String" />
+            <Parameter Name="quality" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="add_menu">
+            <Parameter Name="dID" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="prices" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="add_supplier_detail">
+            <Parameter Name="S_ID" Mode="In" Type="String" />
+            <Parameter Name="S_Name" Mode="In" Type="String" />
+            <Parameter Name="S_Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addAccount">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="sta" Mode="In" Type="String" />
+            <Parameter Name="active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddEmployee">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="start" Mode="In" Type="DateTime" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="position" Mode="In" Type="String" />
+            <Parameter Name="fixed_salary" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="phone_number" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddInventoryProduct">
+            <Parameter Name="amount" Mode="In" Type="Int32" />
+            <Parameter Name="buyingPrice" Mode="In" Type="Int32" />
+            <Parameter Name="dID" Mode="In" Type="String" />
+            <Parameter Name="supplier_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addMonthlyPay">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="DateTime" />
+            <Parameter Name="days_absent" Mode="In" Type="Int32" />
+            <Parameter Name="Penalty" Mode="In" Type="Int32" />
+            <Parameter Name="TotalSalary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addMonthlyPay1">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="DateTime" />
+            <Parameter Name="days_absent" Mode="In" Type="Int32" />
+            <Parameter Name="Penalty" Mode="In" Type="Int32" />
+            <Parameter Name="TotalSalary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="changeMonthlyPay">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="DateTime" />
+            <Parameter Name="days_absent" Mode="In" Type="Int32" />
+            <Parameter Name="Penalty" Mode="In" Type="Int32" />
+            <Parameter Name="TotalSalary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DEL_Acc">
+          <Parameter Name="E_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Employee1">
+          <Parameter Name="E_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Inventory">
+          <Parameter Name="dID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="delete_invoice">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="delete_InvoiceDetail">
+          <Parameter Name="D_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="delete_menu">
+          <Parameter Name="dID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_supplier_detail">
+          <Parameter Name="supplier_id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="deleteMonthlyPay">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Employee_Account">
+            <Parameter Name="Employee_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="fixed_salary" Mode="In" Type="Int32" />
+            <Parameter Name="phone_number" Mode="In" Type="Int32" />
+            <Parameter Name="position" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Employee_Account12">
+            <Parameter Name="Employee_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="fixed_salary" Mode="In" Type="Int32" />
+            <Parameter Name="phone_number" Mode="In" Type="Int32" />
+            <Parameter Name="position" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="manageMonthlyPay">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Month" Mode="In" Type="DateTime" />
+            <Parameter Name="days_absent" Mode="In" Type="Int32" />
+            <Parameter Name="Penalty" Mode="In" Type="Int32" />
+            <Parameter Name="TotalSalary" Mode="In" Type="Int32" />
+            <Parameter Name="Action" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="securityTest" ReturnType="Collection(String)" />
+          <FunctionImport Name="securityTest2" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CoffeeShopRealModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CoffeeShopRealModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="Update_Account">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="Stratification" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Employee">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="Start_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Fixed_Salary" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone_Number" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Inventory">
+            <Parameter Name="amount" Mode="In" Type="Int32" />
+            <Parameter Name="buying_price" Mode="In" Type="Int32" />
+            <Parameter Name="dID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="update_invoice">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="idemp" Mode="In" Type="String" />
+            <Parameter Name="idcus" Mode="In" Type="String" />
+            <Parameter Name="delivery" Mode="In" Type="String" />
+            <Parameter Name="cp" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="update_invoice_detail">
+            <Parameter Name="I_ID" Mode="In" Type="String" />
+            <Parameter Name="D_ID" Mode="In" Type="String" />
+            <Parameter Name="new_quality" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="update_InvoiceDetail">
+            <Parameter Name="Invoice_id" Mode="In" Type="String" />
+            <Parameter Name="Drink_id" Mode="In" Type="String" />
+            <Parameter Name="new_quality" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="update_menu">
+            <Parameter Name="dID" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="img" Mode="In" Type="String" />
+            <Parameter Name="prices" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Update_supplierdetail">
+            <Parameter Name="supplier_id" Mode="In" Type="String" />
+            <Parameter Name="supply_name" Mode="In" Type="String" />
+            <Parameter Name="supply_address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateAccount">
+            <Parameter Name="E_ID" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="sta" Mode="In" Type="String" />
+            <Parameter Name="active" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Accounts" EntityType="CoffeeShopRealModel.Account" />
+          <EntitySet Name="Customers" EntityType="CoffeeShopRealModel.Customer" />
+          <EntitySet Name="Delivery_address" EntityType="CoffeeShopRealModel.Delivery_address" />
+          <EntitySet Name="Employees" EntityType="CoffeeShopRealModel.Employee" />
+          <EntitySet Name="Invoices" EntityType="CoffeeShopRealModel.Invoice" />
+          <EntitySet Name="Invoice_detail" EntityType="CoffeeShopRealModel.Invoice_detail" />
+          <EntitySet Name="Menus" EntityType="CoffeeShopRealModel.Menu" />
+          <EntitySet Name="Monthly_pay" EntityType="CoffeeShopRealModel.Monthly_pay" />
+          <EntitySet Name="ranks" EntityType="CoffeeShopRealModel.rank" />
+          <EntitySet Name="Shops" EntityType="CoffeeShopRealModel.Shop" />
+          <EntitySet Name="Supplier_Detail" EntityType="CoffeeShopRealModel.Supplier_Detail" />
+          <EntitySet Name="sysdiagrams" EntityType="CoffeeShopRealModel.sysdiagram" />
+          <EntitySet Name="Incomes" EntityType="CoffeeShopRealModel.Income" />
+          <EntitySet Name="Inventories" EntityType="CoffeeShopRealModel.Inventory" />
+          <EntitySet Name="Customer_Employee_IDs" EntityType="CoffeeShopRealModel.Customer_Employee_IDs" />
+          <EntitySet Name="inventory_view" EntityType="CoffeeShopRealModel.inventory_view" />
+          <EntitySet Name="PrintInvoices" EntityType="CoffeeShopRealModel.PrintInvoice" />
+          <EntitySet Name="PrintInvoice2" EntityType="CoffeeShopRealModel.PrintInvoice2" />
+          <EntitySet Name="workings" EntityType="CoffeeShopRealModel.working" />
+          <AssociationSet Name="FK__Account__E_ID__398D8EEE" Association="CoffeeShopRealModel.FK__Account__E_ID__398D8EEE">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__cRank__3B75D760" Association="CoffeeShopRealModel.FK__Customer__cRank__3B75D760">
+            <End Role="rank" EntitySet="ranks" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__custome__403A8C7D" Association="CoffeeShopRealModel.FK__Invoice__custome__403A8C7D">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Delivery_a__I_ID__37A5467C" Association="CoffeeShopRealModel.FK__Delivery_a__I_ID__37A5467C">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Delivery_address" EntitySet="Delivery_address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__employe__38996AB5" Association="CoffeeShopRealModel.FK__Invoice__employe__38996AB5">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Monthly_pa__E_ID__3A81B327" Association="CoffeeShopRealModel.FK__Monthly_pa__E_ID__3A81B327">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Monthly_pay" EntitySet="Monthly_pay" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice__shop_ID__35BCFE0A" Association="CoffeeShopRealModel.FK__Invoice__shop_ID__35BCFE0A">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice_de__I_ID__3F466844" Association="CoffeeShopRealModel.FK__Invoice_de__I_ID__3F466844">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Invoice_detail" EntitySet="Invoice_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Invoice_de__d_ID__3E52440B" Association="CoffeeShopRealModel.FK__Invoice_de__d_ID__3E52440B">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Invoice_detail" EntitySet="Invoice_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__dID__3D5E1FD2" Association="CoffeeShopRealModel.FK__Inventory__dID__3D5E1FD2">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Income__S_ID__36B12243" Association="CoffeeShopRealModel.FK__Income__S_ID__36B12243">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Income" EntitySet="Incomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__suppl__3C69FB99" Association="CoffeeShopRealModel.FK__Inventory__suppl__3C69FB99">
+            <End Role="Supplier_Detail" EntitySet="Supplier_Detail" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="statification" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="active" Type="Boolean" />
+          <NavigationProperty Name="Employee" Relationship="CoffeeShopRealModel.FK__Account__E_ID__398D8EEE" FromRole="Account" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="point" Type="Int32" />
+          <Property Name="cRank" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="rank" Relationship="CoffeeShopRealModel.FK__Customer__cRank__3B75D760" FromRole="Customer" ToRole="rank" />
+          <NavigationProperty Name="Invoices" Relationship="CoffeeShopRealModel.FK__Invoice__custome__403A8C7D" FromRole="Customer" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Delivery_address">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="Invoice" Relationship="CoffeeShopRealModel.FK__Delivery_a__I_ID__37A5467C" FromRole="Delivery_address" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="start" Type="DateTime" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fixed_salary" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone_number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="CoffeeShopRealModel.FK__Account__E_ID__398D8EEE" FromRole="Employee" ToRole="Account" />
+          <NavigationProperty Name="Invoices" Relationship="CoffeeShopRealModel.FK__Invoice__employe__38996AB5" FromRole="Employee" ToRole="Invoice" />
+          <NavigationProperty Name="Monthly_pay" Relationship="CoffeeShopRealModel.FK__Monthly_pa__E_ID__3A81B327" FromRole="Employee" ToRole="Monthly_pay" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IDate" Type="DateTime" Precision="0" />
+          <Property Name="customer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="shop_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="coupon" Type="Double" />
+          <Property Name="initial_total" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="delivery" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="employee_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="final_total" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="CoffeeShopRealModel.FK__Invoice__custome__403A8C7D" FromRole="Invoice" ToRole="Customer" />
+          <NavigationProperty Name="Delivery_address" Relationship="CoffeeShopRealModel.FK__Delivery_a__I_ID__37A5467C" FromRole="Invoice" ToRole="Delivery_address" />
+          <NavigationProperty Name="Employee" Relationship="CoffeeShopRealModel.FK__Invoice__employe__38996AB5" FromRole="Invoice" ToRole="Employee" />
+          <NavigationProperty Name="Shop" Relationship="CoffeeShopRealModel.FK__Invoice__shop_ID__35BCFE0A" FromRole="Invoice" ToRole="Shop" />
+          <NavigationProperty Name="Invoice_detail" Relationship="CoffeeShopRealModel.FK__Invoice_de__I_ID__3F466844" FromRole="Invoice" ToRole="Invoice_detail" />
+        </EntityType>
+        <EntityType Name="Invoice_detail">
+          <Key>
+            <PropertyRef Name="I_ID" />
+            <PropertyRef Name="d_ID" />
+          </Key>
+          <Property Name="I_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="d_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="quality" Type="Int32" />
+          <NavigationProperty Name="Invoice" Relationship="CoffeeShopRealModel.FK__Invoice_de__I_ID__3F466844" FromRole="Invoice_detail" ToRole="Invoice" />
+          <NavigationProperty Name="Menu" Relationship="CoffeeShopRealModel.FK__Invoice_de__d_ID__3E52440B" FromRole="Invoice_detail" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="dID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="mName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="mDescription" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="img_path" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="prices" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Invoice_detail" Relationship="CoffeeShopRealModel.FK__Invoice_de__d_ID__3E52440B" FromRole="Menu" ToRole="Invoice_detail" />
+          <NavigationProperty Name="Inventory" Relationship="CoffeeShopRealModel.FK__Inventory__dID__3D5E1FD2" FromRole="Menu" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="Monthly_pay">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="month" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="days_absent" Type="Int32" />
+          <Property Name="penalty" Type="Int32" />
+          <Property Name="total_salary" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="CoffeeShopRealModel.FK__Monthly_pa__E_ID__3A81B327" FromRole="Monthly_pay" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="rank">
+          <Key>
+            <PropertyRef Name="rRank" />
+          </Key>
+          <Property Name="rRank" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="discount" Type="Double" />
+          <NavigationProperty Name="Customers" Relationship="CoffeeShopRealModel.FK__Customer__cRank__3B75D760" FromRole="rank" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fixed_cost" Type="Int32" />
+          <NavigationProperty Name="Invoices" Relationship="CoffeeShopRealModel.FK__Invoice__shop_ID__35BCFE0A" FromRole="Shop" ToRole="Invoice" />
+          <NavigationProperty Name="Incomes" Relationship="CoffeeShopRealModel.FK__Income__S_ID__36B12243" FromRole="Shop" ToRole="Income" />
+        </EntityType>
+        <EntityType Name="Supplier_Detail">
+          <Key>
+            <PropertyRef Name="SD_ID" />
+          </Key>
+          <Property Name="SD_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="supplyName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="sAddress" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Inventories" Relationship="CoffeeShopRealModel.FK__Inventory__suppl__3C69FB99" FromRole="Supplier_Detail" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="S_ID" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="S_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="day_total" Type="Int32" />
+          <Property Name="month_total" Type="Int32" />
+          <NavigationProperty Name="Shop" Relationship="CoffeeShopRealModel.FK__Income__S_ID__36B12243" FromRole="Income" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="amount" Type="Int32" />
+          <Property Name="buyingPrice" Type="Int32" />
+          <Property Name="dID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="supplier_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Menu" Relationship="CoffeeShopRealModel.FK__Inventory__dID__3D5E1FD2" FromRole="Inventory" ToRole="Menu" />
+          <NavigationProperty Name="Supplier_Detail" Relationship="CoffeeShopRealModel.FK__Inventory__suppl__3C69FB99" FromRole="Inventory" ToRole="Supplier_Detail" />
+        </EntityType>
+        <EntityType Name="Customer_Employee_IDs">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Table_Name" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Table_Name" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="inventory_view">
+          <Key>
+            <PropertyRef Name="dID" />
+          </Key>
+          <Property Name="dID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="buyingPrice" Type="Int32" />
+          <Property Name="Drink_Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="Supplier_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PrintInvoice">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IDate" Type="DateTime" Precision="0" />
+          <Property Name="customer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="quality" Type="Int32" />
+          <Property Name="initial_total" Type="Double" />
+          <Property Name="final_total" Type="Double" />
+          <Property Name="Products" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PrintInvoice2">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IDate" Type="DateTime" Precision="0" />
+          <Property Name="customer_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="quality" Type="Int32" />
+          <Property Name="initial_total" Type="Double" />
+          <Property Name="final_total" Type="Double" />
+          <Property Name="d_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Products" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="working">
+          <Key>
+            <PropertyRef Name="E_ID" />
+          </Key>
+          <Property Name="E_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="start" Type="DateTime" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fixed_salary" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone_number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Account__E_ID__398D8EEE">
+          <End Type="CoffeeShopRealModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Account" Role="Account" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="E_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__cRank__3B75D760">
+          <End Type="CoffeeShopRealModel.rank" Role="rank" Multiplicity="0..1" />
+          <End Type="CoffeeShopRealModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rank">
+              <PropertyRef Name="rRank" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="cRank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__custome__403A8C7D">
+          <End Type="CoffeeShopRealModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="CoffeeShopRealModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Delivery_a__I_ID__37A5467C">
+          <End Type="CoffeeShopRealModel.Invoice" Role="Invoice" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Delivery_address" Role="Delivery_address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="I_ID" />
+            </Principal>
+            <Dependent Role="Delivery_address">
+              <PropertyRef Name="I_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__employe__38996AB5">
+          <End Type="CoffeeShopRealModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="CoffeeShopRealModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Monthly_pa__E_ID__3A81B327">
+          <End Type="CoffeeShopRealModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Monthly_pay" Role="Monthly_pay" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="E_ID" />
+            </Principal>
+            <Dependent Role="Monthly_pay">
+              <PropertyRef Name="E_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice__shop_ID__35BCFE0A">
+          <End Type="CoffeeShopRealModel.Shop" Role="Shop" Multiplicity="0..1" />
+          <End Type="CoffeeShopRealModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="shop_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice_de__I_ID__3F466844">
+          <End Type="CoffeeShopRealModel.Invoice" Role="Invoice" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Invoice_detail" Role="Invoice_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="I_ID" />
+            </Principal>
+            <Dependent Role="Invoice_detail">
+              <PropertyRef Name="I_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Invoice_de__d_ID__3E52440B">
+          <End Type="CoffeeShopRealModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Invoice_detail" Role="Invoice_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="dID" />
+            </Principal>
+            <Dependent Role="Invoice_detail">
+              <PropertyRef Name="d_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__dID__3D5E1FD2">
+          <End Type="CoffeeShopRealModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="dID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="dID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Income__S_ID__36B12243">
+          <End Type="CoffeeShopRealModel.Shop" Role="Shop" Multiplicity="1" />
+          <End Type="CoffeeShopRealModel.Income" Role="Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="Income">
+              <PropertyRef Name="S_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__suppl__3C69FB99">
+          <End Type="CoffeeShopRealModel.Supplier_Detail" Role="Supplier_Detail" Multiplicity="0..1" />
+          <End Type="CoffeeShopRealModel.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier_Detail">
+              <PropertyRef Name="SD_ID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoffeeShopRealModelStoreContainer" CdmEntityContainer="QLCoffeEntities">
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.calculate_employee_productivity" FunctionImportName="calculate_employee_productivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.calculate_employee_productivity_Result">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="total_sales" ColumnName="total_sales" />
+                <ScalarProperty Name="total_orders" ColumnName="total_orders" />
+                <ScalarProperty Name="total_revenue" ColumnName="total_revenue" />
+                <ScalarProperty Name="average_revenue_per_order" ColumnName="average_revenue_per_order" />
+                <ScalarProperty Name="average_items_per_order" ColumnName="average_items_per_order" />
+                <ScalarProperty Name="average_revenue_per_item" ColumnName="average_revenue_per_item" />
+                <ScalarProperty Name="productivity" ColumnName="productivity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.calculate_shop_profitability" FunctionImportName="calculate_shop_profitability">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.calculate_shop_profitability_Result">
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+                <ScalarProperty Name="total_revenue" ColumnName="total_revenue" />
+                <ScalarProperty Name="fixed_cost" ColumnName="fixed_cost" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.calculate_shop_profitability1" FunctionImportName="calculate_shop_profitability1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.calculate_shop_profitability1_Result">
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+                <ScalarProperty Name="total_revenue" ColumnName="total_revenue" />
+                <ScalarProperty Name="fixed_cost" ColumnName="fixed_cost" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.Find_Customer" FunctionImportName="Find_Customer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.Find_Customer_Result">
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="cName" ColumnName="cName" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="cRank" ColumnName="cRank" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.Find_Drink" FunctionImportName="Find_Drink">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.Find_Drink_Result">
+                <ScalarProperty Name="dID" ColumnName="dID" />
+                <ScalarProperty Name="mName" ColumnName="mName" />
+                <ScalarProperty Name="mDescription" ColumnName="mDescription" />
+                <ScalarProperty Name="img_path" ColumnName="img_path" />
+                <ScalarProperty Name="prices" ColumnName="prices" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.Find_Employee" FunctionImportName="Find_Employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.Find_Employee_Result">
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="fixed_salary" ColumnName="fixed_salary" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.Find_Employee1" FunctionImportName="Find_Employee1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.Find_Employee1_Result">
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="fixed_salary" ColumnName="fixed_salary" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.findEMP" FunctionImportName="findEMP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.findEMP_Result">
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="fixed_salary" ColumnName="fixed_salary" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.FindTopSalesEmployee" FunctionImportName="FindTopSalesEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.FindTopSalesEmployee_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.get_employee_with_most_sales" FunctionImportName="get_employee_with_most_sales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.get_employee_with_most_sales_Result">
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.InitialTotal1" FunctionImportName="InitialTotal1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.InitialTotal1_Result">
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+                <ScalarProperty Name="total_sum" ColumnName="total_sum" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.sales_trends" FunctionImportName="sales_trends">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.sales_trends_Result">
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="total_sales" ColumnName="total_sales" />
+                <ScalarProperty Name="average_sales" ColumnName="average_sales" />
+                <ScalarProperty Name="peak_sales_time" ColumnName="peak_sales_time" />
+                <ScalarProperty Name="peak_sales_day" ColumnName="peak_sales_day" />
+                <ScalarProperty Name="top_customer_name" ColumnName="top_customer_name" />
+                <ScalarProperty Name="top_customer_total" ColumnName="top_customer_total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="CoffeeShopRealModel.Store.V_CheckAccount" FunctionImportName="V_CheckAccount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.V_CheckAccount_Result">
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="statification" ColumnName="statification" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Add_Account" FunctionName="CoffeeShopRealModel.Store.Add_Account" />
+          <FunctionImportMapping FunctionImportName="Add_Customer" FunctionName="CoffeeShopRealModel.Store.Add_Customer" />
+          <FunctionImportMapping FunctionImportName="add_invoice" FunctionName="CoffeeShopRealModel.Store.add_invoice" />
+          <FunctionImportMapping FunctionImportName="Add_Invoice_detail" FunctionName="CoffeeShopRealModel.Store.Add_Invoice_detail" />
+          <FunctionImportMapping FunctionImportName="add_menu" FunctionName="CoffeeShopRealModel.Store.add_menu" />
+          <FunctionImportMapping FunctionImportName="add_supplier_detail" FunctionName="CoffeeShopRealModel.Store.add_supplier_detail" />
+          <FunctionImportMapping FunctionImportName="addAccount" FunctionName="CoffeeShopRealModel.Store.addAccount" />
+          <FunctionImportMapping FunctionImportName="AddEmployee" FunctionName="CoffeeShopRealModel.Store.AddEmployee" />
+          <FunctionImportMapping FunctionImportName="AddInventoryProduct" FunctionName="CoffeeShopRealModel.Store.AddInventoryProduct" />
+          <FunctionImportMapping FunctionImportName="addMonthlyPay" FunctionName="CoffeeShopRealModel.Store.addMonthlyPay" />
+          <FunctionImportMapping FunctionImportName="addMonthlyPay1" FunctionName="CoffeeShopRealModel.Store.addMonthlyPay1" />
+          <FunctionImportMapping FunctionImportName="changeMonthlyPay" FunctionName="CoffeeShopRealModel.Store.changeMonthlyPay" />
+          <FunctionImportMapping FunctionImportName="DEL_Acc" FunctionName="CoffeeShopRealModel.Store.DEL_Acc" />
+          <FunctionImportMapping FunctionImportName="Delete_Employee1" FunctionName="CoffeeShopRealModel.Store.Delete_Employee1" />
+          <FunctionImportMapping FunctionImportName="Delete_Inventory" FunctionName="CoffeeShopRealModel.Store.Delete_Inventory" />
+          <FunctionImportMapping FunctionImportName="delete_invoice" FunctionName="CoffeeShopRealModel.Store.delete_invoice" />
+          <FunctionImportMapping FunctionImportName="delete_InvoiceDetail" FunctionName="CoffeeShopRealModel.Store.delete_InvoiceDetail" />
+          <FunctionImportMapping FunctionImportName="delete_menu" FunctionName="CoffeeShopRealModel.Store.delete_menu" />
+          <FunctionImportMapping FunctionImportName="Delete_supplier_detail" FunctionName="CoffeeShopRealModel.Store.Delete_supplier_detail" />
+          <FunctionImportMapping FunctionImportName="deleteMonthlyPay" FunctionName="CoffeeShopRealModel.Store.deleteMonthlyPay" />
+          <FunctionImportMapping FunctionImportName="Insert_Employee_Account" FunctionName="CoffeeShopRealModel.Store.Insert_Employee_Account" />
+          <FunctionImportMapping FunctionImportName="Insert_Employee_Account12" FunctionName="CoffeeShopRealModel.Store.Insert_Employee_Account12" />
+          <FunctionImportMapping FunctionImportName="manageMonthlyPay" FunctionName="CoffeeShopRealModel.Store.manageMonthlyPay" />
+          <FunctionImportMapping FunctionImportName="securityTest" FunctionName="CoffeeShopRealModel.Store.securityTest" />
+          <FunctionImportMapping FunctionImportName="securityTest2" FunctionName="CoffeeShopRealModel.Store.securityTest2" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CoffeeShopRealModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CoffeeShopRealModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CoffeeShopRealModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CoffeeShopRealModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CoffeeShopRealModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoffeeShopRealModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CoffeeShopRealModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CoffeeShopRealModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="Update_Account" FunctionName="CoffeeShopRealModel.Store.Update_Account" />
+          <FunctionImportMapping FunctionImportName="Update_Employee" FunctionName="CoffeeShopRealModel.Store.Update_Employee" />
+          <FunctionImportMapping FunctionImportName="Update_Inventory" FunctionName="CoffeeShopRealModel.Store.Update_Inventory" />
+          <FunctionImportMapping FunctionImportName="update_invoice" FunctionName="CoffeeShopRealModel.Store.update_invoice" />
+          <FunctionImportMapping FunctionImportName="update_invoice_detail" FunctionName="CoffeeShopRealModel.Store.update_invoice_detail" />
+          <FunctionImportMapping FunctionImportName="update_InvoiceDetail" FunctionName="CoffeeShopRealModel.Store.update_InvoiceDetail" />
+          <FunctionImportMapping FunctionImportName="update_menu" FunctionName="CoffeeShopRealModel.Store.update_menu" />
+          <FunctionImportMapping FunctionImportName="Update_supplierdetail" FunctionName="CoffeeShopRealModel.Store.Update_supplierdetail" />
+          <FunctionImportMapping FunctionImportName="updateAccount" FunctionName="CoffeeShopRealModel.Store.updateAccount" />
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="statification" ColumnName="statification" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="cRank" ColumnName="cRank" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="cName" ColumnName="cName" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery_address">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Delivery_address">
+              <MappingFragment StoreEntitySet="Delivery_address">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fixed_salary" ColumnName="fixed_salary" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="final_total" ColumnName="final_total" />
+                <ScalarProperty Name="employee_ID" ColumnName="employee_ID" />
+                <ScalarProperty Name="delivery" ColumnName="delivery" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="initial_total" ColumnName="initial_total" />
+                <ScalarProperty Name="coupon" ColumnName="coupon" />
+                <ScalarProperty Name="shop_ID" ColumnName="shop_ID" />
+                <ScalarProperty Name="customer_ID" ColumnName="customer_ID" />
+                <ScalarProperty Name="IDate" ColumnName="IDate" />
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_detail">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Invoice_detail">
+              <MappingFragment StoreEntitySet="Invoice_detail">
+                <ScalarProperty Name="quality" ColumnName="quality" />
+                <ScalarProperty Name="d_ID" ColumnName="d_ID" />
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="prices" ColumnName="prices" />
+                <ScalarProperty Name="img_path" ColumnName="img_path" />
+                <ScalarProperty Name="mDescription" ColumnName="mDescription" />
+                <ScalarProperty Name="mName" ColumnName="mName" />
+                <ScalarProperty Name="dID" ColumnName="dID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monthly_pay">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Monthly_pay">
+              <MappingFragment StoreEntitySet="Monthly_pay">
+                <ScalarProperty Name="total_salary" ColumnName="total_salary" />
+                <ScalarProperty Name="penalty" ColumnName="penalty" />
+                <ScalarProperty Name="days_absent" ColumnName="days_absent" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ranks">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.rank">
+              <MappingFragment StoreEntitySet="rank">
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="rRank" ColumnName="rRank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="Fixed_cost" ColumnName="Fixed_cost" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier_Detail">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Supplier_Detail">
+              <MappingFragment StoreEntitySet="Supplier_Detail">
+                <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+                <ScalarProperty Name="supplyName" ColumnName="supplyName" />
+                <ScalarProperty Name="SD_ID" ColumnName="SD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incomes">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Income">
+              <MappingFragment StoreEntitySet="Income">
+                <ScalarProperty Name="month_total" ColumnName="month_total" />
+                <ScalarProperty Name="day_total" ColumnName="day_total" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="supplier_ID" ColumnName="supplier_ID" />
+                <ScalarProperty Name="dID" ColumnName="dID" />
+                <ScalarProperty Name="buyingPrice" ColumnName="buyingPrice" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Employee_IDs">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.Customer_Employee_IDs">
+              <MappingFragment StoreEntitySet="Customer_Employee_IDs">
+                <ScalarProperty Name="Table_Name" ColumnName="Table_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventory_view">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.inventory_view">
+              <MappingFragment StoreEntitySet="inventory_view">
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="Drink_Name" ColumnName="Drink_Name" />
+                <ScalarProperty Name="buyingPrice" ColumnName="buyingPrice" />
+                <ScalarProperty Name="dID" ColumnName="dID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrintInvoices">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.PrintInvoice">
+              <MappingFragment StoreEntitySet="PrintInvoice">
+                <ScalarProperty Name="Products" ColumnName="Products" />
+                <ScalarProperty Name="final_total" ColumnName="final_total" />
+                <ScalarProperty Name="initial_total" ColumnName="initial_total" />
+                <ScalarProperty Name="quality" ColumnName="quality" />
+                <ScalarProperty Name="customer_ID" ColumnName="customer_ID" />
+                <ScalarProperty Name="IDate" ColumnName="IDate" />
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrintInvoice2">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.PrintInvoice2">
+              <MappingFragment StoreEntitySet="PrintInvoice2">
+                <ScalarProperty Name="Products" ColumnName="Products" />
+                <ScalarProperty Name="d_ID" ColumnName="d_ID" />
+                <ScalarProperty Name="final_total" ColumnName="final_total" />
+                <ScalarProperty Name="initial_total" ColumnName="initial_total" />
+                <ScalarProperty Name="quality" ColumnName="quality" />
+                <ScalarProperty Name="customer_ID" ColumnName="customer_ID" />
+                <ScalarProperty Name="IDate" ColumnName="IDate" />
+                <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workings">
+            <EntityTypeMapping TypeName="CoffeeShopRealModel.working">
+              <MappingFragment StoreEntitySet="working">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fixed_salary" ColumnName="fixed_salary" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="E_ID" ColumnName="E_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

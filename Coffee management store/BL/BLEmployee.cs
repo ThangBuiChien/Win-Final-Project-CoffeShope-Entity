@@ -15,16 +15,34 @@ namespace Coffee_management_store.BL
 {
     class BLEmployee
     {
+        //not done
+
+
         Database db = null;
         public BLEmployee()
         {
             db = new Database();
         }
 
-        public DataSet GetID_C_E()
+        public DataTable GetID_C_E()
         {
-            string mysql = $"SELECT * FROM Customer_Employee_IDs";
-            return db.ExecuteQueryDataSet(mysql, CommandType.Text);
+           /* string mysql = $"SELECT * FROM Customer_Employee_IDs";
+            return db.ExecuteQueryDataSet(mysql, CommandType.Text);*/
+
+            QLCoffeEntities qlbhEntity = new QLCoffeEntities();
+            var tps =
+            from p in qlbhEntity.Customer_Employee_IDs
+            select p;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Table Name");
+            
+
+            foreach (var p in tps)
+            {
+                dt.Rows.Add(p.ID,p.Table_Name);
+            }
+            return dt;
         }
         public DataSet GetEmployee()
         {
@@ -56,7 +74,7 @@ namespace Coffee_management_store.BL
         }
         public bool ADDEmployee(string ID, DateTime date, string Name, string position, int salary, string email, int phone, string status, ref string err)
         {
-            if (salary == null)
+            if (salary == 0)
             {
                 salary = 0;
             }
@@ -65,7 +83,7 @@ namespace Coffee_management_store.BL
         }
 
         public bool UpdateEMP(string ID, DateTime date, string Name, string position, int salary, string email, int phone, string status, ref string err)
-        {   if(salary == null)
+        {   if(salary == 0)
             {
                 salary = 0;
             }

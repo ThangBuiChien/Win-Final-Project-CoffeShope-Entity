@@ -33,9 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <Compile Include="BL\BLAccount.cs" />
     <Compile Include="BL\BLAnalysis.cs" />
     <Compile Include="BL\BLCustomer.cs" />
@@ -58,17 +70,77 @@
     <Compile Include="BL\InvoiceBL.cs" />
     <Compile Include="BL\Invoice_DtBL.cs" />
     <Compile Include="BL\SupplyBL.cs" />
+    <Compile Include="calculate_employee_productivity_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="calculate_shop_profitability1_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="calculate_shop_profitability_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <Compile Include="Coffee_Management_DatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Coffee_Management_DatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Employee_IDs.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Database.cs" />
+    <Compile Include="Delivery_address.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="findEMP_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FindTopSalesEmployee_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Find_Customer_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Find_Drink_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Find_Employee1_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Find_Employee_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_employee_with_most_sales_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Income.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InitialTotal1_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="inventory_view.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice_detail.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -82,8 +154,62 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Monthly_pay.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrintInvoice.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrintInvoice2.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLCoffe.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCoffe.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLCoffe.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLCoffe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCoffe.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="rank.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sales_trends_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shop.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier_Detail.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_CheckAccount_Result.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="working.cs">
+      <DependentUpon>QLCoffe.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +240,7 @@
     <None Include="Coffee_Management_DatabaseDataSet.xss">
       <DependentUpon>Coffee_Management_DatabaseDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +258,13 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="QLCoffe.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLCoffe.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="QLCoffe.edmx.diagram">
+      <DependentUpon>QLCoffe.edmx</DependentUpon>
+    </None>
     <None Include="Resources\download %283%29.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +344,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\restart_icon_227406.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QLCoffe.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCoffe.edmx</DependentUpon>
+      <LastGenOutput>QLCoffe.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="QLCoffe.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCoffe.edmx</DependentUpon>
+      <LastGenOutput>QLCoffe.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

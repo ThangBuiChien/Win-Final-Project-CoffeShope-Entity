@@ -56,12 +56,12 @@ namespace Coffee_management_store
         {
             try
             {
-                tbCustomer = new DataTable();
+               /* tbCustomer = new DataTable();
                 tbCustomer.Clear();
                 DataSet dataSet = dbCustomer.GetCustomer();
-                tbCustomer = dataSet.Tables[0];
+                tbCustomer = dataSet.Tables[0];*/
                 // push on data GRV
-                dataGridViewCustomer.DataSource = tbCustomer;
+                dataGridViewCustomer.DataSource = dbCustomer.GetCustomer();
                 // chang size table
                 dataGridViewCustomer.AutoResizeColumns();
                 //
@@ -87,7 +87,7 @@ namespace Coffee_management_store
                 string cName = txtcName.Text;
 
                 string errorMessage;
-                bool isSuccess = this.dbCustomer.AddCustomer(cID, cName, out errorMessage);
+                bool isSuccess = this.dbCustomer.AddCustomer(cID, cName, ref err);
 
                 if (isSuccess)
                 {
@@ -96,7 +96,7 @@ namespace Coffee_management_store
                 }
                 else
                 {
-                    MessageBox.Show($"Error adding customer: {errorMessage}");
+                    MessageBox.Show($"Error adding customer: {err}");
                 }
             }
             catch (Exception ex)
@@ -283,12 +283,12 @@ namespace Coffee_management_store
         {
             try
             {
-                DataTable dtivd = new DataTable();
+                /*DataTable dtivd = new DataTable();
                 dtivd = new DataTable();
                 dsivd = ivd.Loadinvoicedetail(Iid);
-                dtivd = dsivd.Tables[0];
-                DGVDetailOder.DataSource = dtivd;
-                dataGridViewDetailInvoiceView.DataSource = dtivd;
+                dtivd = dsivd.Tables[0];*/
+                DGVDetailOder.DataSource = ivd.Loadinvoicedetail(Iid);
+                dataGridViewDetailInvoiceView.DataSource = ivd.Loadinvoicedetail(Iid);
             }
             catch (SqlException)
             {
@@ -306,11 +306,11 @@ namespace Coffee_management_store
         {
             try
             {
-                DataTable dtIv = new DataTable();
+             /*   DataTable dtIv = new DataTable();
                 dtIv = new DataTable();
                 dsIv = iv.Loadinvoice();
-                dtIv = dsIv.Tables[0];
-                receiptgridview.DataSource = dtIv;
+                dtIv = dsIv.Tables[0];*/
+                receiptgridview.DataSource = iv.Loadinvoice() ;
 
             }
             catch (SqlException)
@@ -354,11 +354,11 @@ namespace Coffee_management_store
         {
             try
             {
-                DataTable dtmenu = new DataTable();
+                /*DataTable dtmenu = new DataTable();
                 dtmenu = new DataTable();
                 dsmenu = menu.Loadmenu();
-                dtmenu = dsmenu.Tables[0];
-                menugridview.DataSource = dtmenu;
+                dtmenu = dsmenu.Tables[0];*/
+                menugridview.DataSource = menu.Loadmenu();
                 menugridview.AutoResizeColumns();
                 menugridview_CellClick(null, null);
                 addmenu = false;
@@ -519,15 +519,15 @@ namespace Coffee_management_store
             receiptgridview.RowHeadersVisible = false;
             btnAdddrink.Enabled = false;
             btnDeleteInv.Enabled = false;
-            DataTable dtmenu = new DataTable();
+           /* DataTable dtmenu = new DataTable();
             dsmenu = menu.Loadmenu();
-            dtmenu = dsmenu.Tables[0];
-            invoicegridview.DataSource = dtmenu;
-            DataTable tbE = new DataTable();
+            dtmenu = dsmenu.Tables[0];*/
+            invoicegridview.DataSource = menu.Loadmenu();
+            /*DataTable tbE = new DataTable();
             tbE.Clear();
             DataSet dataSet = dbEmp.GetID_C_E();
-            tbE = dataSet.Tables[0];
-            dataGridViewID_C_E_order.DataSource = tbE;
+            tbE = dataSet.Tables[0];*/
+            dataGridViewID_C_E_order.DataSource = dbEmp.GetID_C_E();
 
         }
        
@@ -833,12 +833,12 @@ namespace Coffee_management_store
         {
             try
             {
-                tbAccount = new DataTable();
+                /*tbAccount = new DataTable();
                 tbAccount.Clear();
                 DataSet dataSet = dbAccount.GetAccount();
-                tbAccount = dataSet.Tables[0];
+                tbAccount = dataSet.Tables[0];*/
                 // push on data GRV
-                dataGridViewAccount.DataSource = tbAccount;
+                dataGridViewAccount.DataSource = dbAccount.GetAccount();
                 // chang size table
                 dataGridViewAccount.AutoResizeColumns();
                 //
@@ -910,7 +910,7 @@ namespace Coffee_management_store
                 {
 
                     int active = 0;
-                    bool isSuccess = this.dbAccount.UpdateAccount(tbEIDAccount.Text, tbUserAccount.Text, tbPassAccount.Text, tbSTFAccount.Text, active, ref err); ;
+                    bool isSuccess = this.dbAccount.UpdateAccount(tbEIDAccount.Text, tbUserAccount.Text, tbPassAccount.Text, tbSTFAccount.Text, Convert.ToBoolean(active), ref err); ;
                     if (isSuccess)
                     {
                         MessageBox.Show("Add successfully.");
